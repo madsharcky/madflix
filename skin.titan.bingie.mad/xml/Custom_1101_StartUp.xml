@@ -99,7 +99,6 @@
 						<onclick>RunScript(script.skin.helper.service,action=setkodisetting,setting=videolibrary.tvshowsselectfirstunwatcheditem,value=2)</onclick>
 						<onclick>RunScript(script.skin.helper.service,action=setkodisetting,setting=videolibrary.flattentvshows,value=2)</onclick>
 						<onclick>RunScript(script.skin.helper.service,action=setkodisetting,setting=myvideos.selectaction,value=2)</onclick>
-						<onclick>RunAddon(script.connect.FTP)</onclick>
 						<onclick>AlarmClock(clear_property,ClearProperty(finishBingieStartup1,Home),00:02,silent)</onclick>
 						<onclick>AlarmClock(delay_window,ReplaceWindow($VAR[StartUpWindow]),00:01,silent)</onclick>
 						<onup>PageUp(3000)</onup>
@@ -116,10 +115,10 @@
 						<texture colordiffuse="cc515151" border="2">colors/color_white.png</texture>
 					</control>
 					<control type="image">
-						<width>1%</width>
+						<width>33%</width>
 						<height>100%</height>
 						<texture colordiffuse="$INFO[Skin.String(OSDProgressBarColor)]" border="4">colors/color_white.png</texture>
-						<animation effect="zoom" end="5000,100" easing="in" tween="cubic" time="600" condition="!String.IsEmpty(Window(Home).Property(finishBingieStartup1))">Conditional</animation>
+						<animation effect="zoom" end="6600,100" easing="in" tween="cubic" time="600" condition="!String.IsEmpty(Window(Home).Property(finishBingieStartup1))">Conditional</animation>
 					</control>
 				</control>
 			</control>
