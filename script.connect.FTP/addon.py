@@ -11,7 +11,7 @@ addon = xbmcaddon.Addon()
 addonid= addon.getAddonInfo('id')
 KodiFolder = xbmc.translatePath("special://home")
 savelocation = xbmc.translatePath("special://userdata")
-getlocation =  KodiFolder+r"\addons"+"\\"+addonid+r"\resources"
+getlocation =  KodiFolder+"/addons/"+addonid+"/resources"
 
 # Launch a dialog box in kodi giving the user Input methods
 dialog=xbmcgui.Dialog()
@@ -19,24 +19,24 @@ username = dialog.input("Please enter username: ", type=xbmcgui.INPUT_ALPHANUM)
 pwd= dialog.input("Now enter your Passsword: ", type=xbmcgui.INPUT_ALPHANUM, option=xbmcgui.ALPHANUM_HIDE_INPUT)
 
 #edit mediasources file 
-mediasources = ET.parse(getlocation+r"\mediasources.xml")
+mediasources = ET.parse(getlocation+"/mediasources.xml")
 root = mediasources.getroot()
 for elem in root.iter("location"):
     elem.text = "ftp://"+username+":"+pwd+"@4k6qpf10oygosoxr.myfritz.net:990/"
-mediasources.write(savelocation+r"\mediasources.xml")
+mediasources.write(savelocation+"/mediasources.xml")
 
 #edit sources file
-sources=ET.parse(getlocation+r"\sources.xml")
+sources=ET.parse(getlocation+"/sources.xml")
 root=sources.getroot()
 video=root.find("video")
 for source in video.findall("source"):
     name = source.find("name")
     path = source.find("path")
     path.text = "ftp://"+username+":"+pwd+"@4k6qpf10oygosoxr.myfritz.net:990/"+name.text
-sources.write(savelocation+r"\sources.xml")
+sources.write(savelocation+"/sources.xml")
 
 #adding to Video Database
-conn = sqlite3.connect(savelocation +r"\Database\MyVideos116.db")
+conn = sqlite3.connect(savelocation +"/Database/MyVideos116.db")
 c=conn.cursor()
 c.execute(""" DELETE FROM "main"."path" """)
 c.execute(""" INSERT INTO "main"."path" ("idPath", "strPath", "strContent", "strScraper", "strHash", "scanRecursive", "useFolderNames", "strSettings", "noUpdate", "exclude", "dateAdded", "idParentPath") VALUES ('2', 'ftp://"""+username+":"+pwd+"""@4k6qpf10oygosoxr.myfritz.net:990/Deutsch/', 'movies', 'metadata.themoviedb.org', '', '2147483647', '1', '<settings version="2"><setting id="certprefix" default="true">Rated </setting><setting id="fanart">true</setting><setting id="imdbanyway" default="true">false</setting><setting id="keeporiginaltitle" default="true">false</setting><setting id="landscape" default="true">false</setting><setting id="language">de-DE</setting><setting id="RatingS">IMDb</setting><setting id="tmdbcertcountry" default="true">us</setting><setting id="trailer">true</setting></settings>', '0', '0', '', ''); """)
